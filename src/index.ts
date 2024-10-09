@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
-import { downloadCedict } from './fileHelpers'; // Import the download function
+import { downloadCedict } from './fileHelpers';
 
 dotenv.config();
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT;
 // Enable gzip compression
 app.use(compression());
 
-// Schedule the download to run once every day at midnight
+// Schedule the download to run periodically
 cron.schedule(process.env.CRON_TIME!, () => {
     console.log('Running the scheduled task to download CC-CEDICT...');
     downloadCedict();
@@ -39,5 +39,5 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Initially call the download function on server start to ensure the latest data is available
+// Initially call the download function on server start
 downloadCedict();

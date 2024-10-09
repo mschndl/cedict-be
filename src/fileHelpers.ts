@@ -8,7 +8,7 @@ dotenv.config();
 
 // Function to get the current timestamp
 const getCurrentTime = (): string => {
-    return new Date().toISOString(); // Returns the current time in ISO format
+    return new Date().toISOString();
 };
 
 // Function to download the CC-CEDICT ZIP file
@@ -42,7 +42,7 @@ export const unzipAndConvertToJson = (filePath: string): Promise<void> => {
         zip.extractAllTo(outputDir, true);
 
         // Read the unzipped CEDICT file
-        const cedictFile = path.join(outputDir, process.env.CEDICT_EXTRACTED_FILE!); // Ensure this is the correct file
+        const cedictFile = path.join(outputDir, process.env.CEDICT_EXTRACTED_FILE!);
         const cedictContent = fs.readFileSync(cedictFile, 'utf-8');
 
         const entries: any[] = [];
@@ -76,7 +76,7 @@ export const unzipAndConvertToJson = (filePath: string): Promise<void> => {
         fs.writeFileSync(jsonFilePath, JSON.stringify(entries, null, 2));
         console.log(`${getCurrentTime()}: CC-CEDICT data converted to JSON successfully.`);
 
-        // Save the metadata to a separate file (optional)
+        // Save the metadata to a separate file
         const metadataFilePath = path.join(outputDir, process.env.CEDICT_METADATA_FILE!);
         fs.writeFileSync(metadataFilePath, JSON.stringify(metadata, null, 2));
         console.log(`${getCurrentTime()}: Metadata saved successfully.`);
