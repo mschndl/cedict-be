@@ -17,14 +17,18 @@ const PORT = getEnvVar("PORT");
 app.use(compression());
 
 // Schedule the download to run periodically
-cron.schedule(getEnvVar("CRON_TIME"), () => {
+cron.schedule(getEnvVar("CRON_SCHEDULE"), () => {
 	console.log("Running the scheduled task to download CC-CEDICT...");
 	downloadCedict();
 });
 
 // Endpoint to serve the CC-CEDICT JSON data
 app.get("/cedict", (req, res) => {
-	const jsonFilePath = path.join(__dirname, "cedict", "cedict.json");
+	const jsonFilePath = path.join(
+		__dirname,
+		"cedict",
+		getEnvVar("CEDICT_JSON_FILE"),
+	);
 	res.setHeader("Content-Type", "application/json");
 
 	// Stream the JSON file with compression
