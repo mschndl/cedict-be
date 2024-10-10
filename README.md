@@ -24,7 +24,11 @@ npm install
 3. Set up environment variables: Create a *.env* file in the root directory with the following:
 ```bash
 CEDICT_URL=https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.zip
-PORT=3000
+CEDICT_EXTRACTED_FILE=cedict_ts.u8
+CEDICT_ZIP_FILE=<zipfile_name>.zip
+CEDICT_JSON_FILE=<jsonfile_name>.json
+CEDICT_METADATA_FILE=<metadatafile_name>.json
+PORT=<port_number>
 CRON_SCHEDULE=* * * * *
 ```
 ## Usage
